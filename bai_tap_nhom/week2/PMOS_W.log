@@ -1,0 +1,194 @@
+LTspice 26.0.2 for Windows
+Circuit: D:\Duong\ICTT\LT Spice Project\bai_tap_nhom\week2\PMOS_W.net
+Start Time: Sun Sep 20 19:39:29 2026
+Options:logopinfo numdgt=15
+solver = Normal
+Maximum thread count: 8
+tnom = 27
+temp = 27
+method = trap
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Warning: Pd = 0 is less than W.
+Warning: Ps = 0 is less than W.
+Direct Newton iteration succeeded in finding operating point.
+Semiconductor Device Operating Points:
+                        --- BSIM3 MOSFETS ---
+Name:         M1          M2          M3          M4          M5
+Model:        pm          pm          pm          pm          pm
+Id:       -5.00e-05   -1.08e-04   -1.65e-04   -2.23e-04   -2.81e-04
+Vgs:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vds:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Vth:      -7.74e-01   -7.37e-01   -7.24e-01   -7.18e-01   -7.15e-01
+Vdsat:    -3.98e+00   -4.08e+00   -4.12e+00   -4.13e+00   -4.14e+00
+Gm:        1.77e-05    3.77e-05    5.77e-05    7.77e-05    9.77e-05
+Gds:       3.82e-07    8.58e-07    1.34e-06    1.82e-06    2.30e-06
+Gmb        6.79e-06    1.54e-05    2.41e-05    3.28e-05    4.14e-05
+Cbd:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cgsov:     1.81e-16    3.75e-16    5.69e-16    7.63e-16    9.57e-16
+Cgdov:     1.68e-16    3.48e-16    5.29e-16    7.09e-16    8.90e-16
+Cgbov:     5.45e-16    5.45e-16    5.45e-16    5.45e-16    5.45e-16
+dQgdVgb:   1.58e-14    3.20e-14    4.83e-14    6.45e-14    8.07e-14
+dQgdVdb:  -1.77e-16   -3.71e-16   -5.65e-16   -7.59e-16   -9.53e-16
+dQgdVsb:  -1.57e-14   -3.20e-14   -4.84e-14   -6.47e-14   -8.11e-14
+dQddVgb:  -1.85e-16   -3.89e-16   -5.94e-16   -7.99e-16   -1.00e-15
+dQddVdb:   1.85e-16    3.89e-16    5.93e-16    7.98e-16    1.00e-15
+dQddVsb:  -2.47e-18   -5.41e-18   -8.36e-18   -1.13e-17   -1.42e-17
+dQbdVgb:  -1.75e-15   -2.89e-15   -4.03e-15   -5.17e-15   -6.30e-15
+dQbdVdb:  -1.97e-18   -4.44e-18   -6.93e-18   -9.42e-18   -1.19e-17
+dQbdVsb:  -2.00e-15   -4.55e-15   -7.10e-15   -9.65e-15   -1.22e-14
+
+Name:         M6          M7          M8          M9         M10
+Model:        pm          pm          pm          pm          pm
+Id:       -3.39e-04   -3.96e-04   -4.54e-04   -5.12e-04   -5.70e-04
+Vgs:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vds:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Vth:      -7.12e-01   -7.11e-01   -7.09e-01   -7.08e-01   -7.08e-01
+Vdsat:    -4.15e+00   -4.16e+00   -4.16e+00   -4.16e+00   -4.16e+00
+Gm:        1.18e-04    1.38e-04    1.58e-04    1.78e-04    1.98e-04
+Gds:       2.78e-06    3.26e-06    3.74e-06    4.22e-06    4.70e-06
+Gmb        5.01e-05    5.88e-05    6.75e-05    7.61e-05    8.48e-05
+Cbd:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cgsov:     1.15e-15    1.34e-15    1.54e-15    1.73e-15    1.93e-15
+Cgdov:     1.07e-15    1.25e-15    1.43e-15    1.61e-15    1.79e-15
+Cgbov:     5.45e-16    5.45e-16    5.45e-16    5.45e-16    5.45e-16
+dQgdVgb:   9.69e-14    1.13e-13    1.29e-13    1.46e-13    1.62e-13
+dQgdVdb:  -1.15e-15   -1.34e-15   -1.54e-15   -1.73e-15   -1.92e-15
+dQgdVsb:  -9.74e-14   -1.14e-13   -1.30e-13   -1.46e-13   -1.63e-13
+dQddVgb:  -1.21e-15   -1.41e-15   -1.62e-15   -1.82e-15   -2.03e-15
+dQddVdb:   1.21e-15    1.41e-15    1.62e-15    1.82e-15    2.03e-15
+dQddVsb:  -1.72e-17   -2.01e-17   -2.31e-17   -2.60e-17   -2.90e-17
+dQbdVgb:  -7.44e-15   -8.58e-15   -9.71e-15   -1.08e-14   -1.20e-14
+dQbdVdb:  -1.44e-17   -1.69e-17   -1.94e-17   -2.19e-17   -2.44e-17
+dQbdVsb:  -1.48e-14   -1.73e-14   -1.99e-14   -2.24e-14   -2.50e-14
+
+Name:        M11         M12         M13         M14         M15
+Model:        pm          pm          pm          pm          pm
+Id:       -8.58e-04   -1.15e-03   -1.44e-03   -1.72e-03   -2.01e-03
+Vgs:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vds:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Vth:      -7.05e-01   -7.04e-01   -7.03e-01   -7.03e-01   -7.03e-01
+Vdsat:    -4.17e+00   -4.17e+00   -4.18e+00   -4.18e+00   -4.18e+00
+Gm:        2.98e-04    3.98e-04    4.98e-04    5.98e-04    6.98e-04
+Gds:       7.11e-06    9.51e-06    1.19e-05    1.43e-05    1.67e-05
+Gmb        1.28e-04    1.72e-04    2.15e-04    2.58e-04    3.02e-04
+Cbd:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cgsov:     2.90e-15    3.87e-15    4.84e-15    5.81e-15    6.78e-15
+Cgdov:     2.69e-15    3.60e-15    4.50e-15    5.40e-15    6.30e-15
+Cgbov:     5.45e-16    5.45e-16    5.45e-16    5.45e-16    5.45e-16
+dQgdVgb:   2.43e-13    3.24e-13    4.05e-13    4.86e-13    5.68e-13
+dQgdVdb:  -2.89e-15   -3.87e-15   -4.84e-15   -5.81e-15   -6.78e-15
+dQgdVsb:  -2.44e-13   -3.26e-13   -4.08e-13   -4.90e-13   -5.71e-13
+dQddVgb:  -3.05e-15   -4.08e-15   -5.10e-15   -6.13e-15   -7.15e-15
+dQddVdb:   3.05e-15    4.07e-15    5.10e-15    6.12e-15    7.15e-15
+dQddVsb:  -4.37e-17   -5.84e-17   -7.31e-17   -8.78e-17   -1.02e-16
+dQbdVgb:  -1.77e-14   -2.34e-14   -2.90e-14   -3.47e-14   -4.04e-14
+dQbdVdb:  -3.69e-17   -4.94e-17   -6.19e-17   -7.44e-17   -8.69e-17
+dQbdVsb:  -3.78e-14   -5.05e-14   -6.33e-14   -7.61e-14   -8.89e-14
+
+Name:        M16         M17         M18         M19         M20
+Model:        pm          pm          pm          pm          pm
+Id:       -2.30e-03   -2.88e-03   -3.46e-03   -4.03e-03   -4.61e-03
+Vgs:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vds:      -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00   -5.00e+00
+Vbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Vth:      -7.02e-01   -7.02e-01   -7.02e-01   -7.02e-01   -7.02e-01
+Vdsat:    -4.18e+00   -4.18e+00   -4.18e+00   -4.18e+00   -4.18e+00
+Gm:        7.98e-04    9.98e-04    1.20e-03    1.40e-03    1.60e-03
+Gds:       1.91e-05    2.39e-05    2.87e-05    3.36e-05    3.84e-05
+Gmb        3.45e-04    4.32e-04    5.19e-04    6.06e-04    6.92e-04
+Cbd:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cbs:       0.00e+00    0.00e+00    0.00e+00    0.00e+00    0.00e+00
+Cgsov:     7.75e-15    9.69e-15    1.16e-14    1.36e-14    1.55e-14
+Cgdov:     7.20e-15    9.01e-15    1.08e-14    1.26e-14    1.44e-14
+Cgbov:     5.45e-16    5.45e-16    5.45e-16    5.45e-16    5.45e-16
+dQgdVgb:   6.49e-13    8.11e-13    9.73e-13    1.14e-12    1.30e-12
+dQgdVdb:  -7.75e-15   -9.69e-15   -1.16e-14   -1.36e-14   -1.55e-14
+dQgdVsb:  -6.53e-13   -8.16e-13   -9.80e-13   -1.14e-12   -1.31e-12
+dQddVgb:  -8.18e-15   -1.02e-14   -1.23e-14   -1.43e-14   -1.64e-14
+dQddVdb:   8.17e-15    1.02e-14    1.23e-14    1.43e-14    1.64e-14
+dQddVsb:  -1.17e-16   -1.47e-16   -1.76e-16   -2.05e-16   -2.35e-16
+dQbdVgb:  -4.61e-14   -5.75e-14   -6.88e-14   -8.02e-14   -9.15e-14
+dQbdVdb:  -9.94e-17   -1.24e-16   -1.49e-16   -1.74e-16   -1.99e-16
+dQbdVsb:  -1.02e-13   -1.27e-13   -1.53e-13   -1.78e-13   -2.04e-13
+
+Name:        M21         M22
+Model:        pm          pm
+Id:       -5.19e-03   -5.77e-03
+Vgs:      -5.00e+00   -5.00e+00
+Vds:      -5.00e+00   -5.00e+00
+Vbs:       0.00e+00    0.00e+00
+Vth:      -7.01e-01   -7.01e-01
+Vdsat:    -4.18e+00   -4.18e+00
+Gm:        1.80e-03    2.00e-03
+Gds:       4.32e-05    4.80e-05
+Gmb        7.79e-04    8.66e-04
+Cbd:       0.00e+00    0.00e+00
+Cbs:       0.00e+00    0.00e+00
+Cgsov:     1.74e-14    1.94e-14
+Cgdov:     1.62e-14    1.80e-14
+Cgbov:     5.45e-16    5.45e-16
+dQgdVgb:   1.46e-12    1.62e-12
+dQgdVdb:  -1.75e-14   -1.94e-14
+dQgdVsb:  -1.47e-12   -1.63e-12
+dQddVgb:  -1.84e-14   -2.05e-14
+dQddVdb:   1.84e-14    2.05e-14
+dQddVsb:  -2.64e-16   -2.94e-16
+dQbdVgb:  -1.03e-13   -1.14e-13
+dQbdVdb:  -2.24e-16   -2.49e-16
+dQbdVsb:  -2.29e-13   -2.55e-13
+
+
+Total elapsed time: 0.122 seconds.
+
+Files loaded:
+D:\Duong\ICTT\LT Spice Project\bai_tap_nhom\week2\PMOS_W.net
+C:\Users\DuongNguyen\AppData\Local\LTspice\lib\cmp\standard.mos
+C:\Users\DuongNguyen\AppData\Local\LTspice\lib\sym\035_ltspice_lib\5827_035.lib
+
