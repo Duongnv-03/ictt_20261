@@ -36,7 +36,9 @@ I_{D0}\approx I_D(0{,}6\,\mathrm V)-0{,}6g_{ds},\qquad
 \lambda\approx\frac{g_{ds}}{I_{D0}}.
 \]
 
-Sau đó, tính điện trở đầu ra tại `VDS = 1,3 V` theo công thức đề bài:
+Đề không chỉ định phải lấy `ID` tại giá trị `VDS` nào trong vùng bão hòa để tính `ro`. Trong báo cáo này, chọn `VDS = 1,3 V`, là trung điểm của khoảng 0,6–2,0 V dùng để khớp độ dốc vùng bão hòa. Cách chọn này tránh lấy ngay tại hai đầu khoảng khớp và đại diện cho một điểm làm việc giữa dải để so sánh năm transistor. Nếu chọn một `VDS` khác trong vùng bão hòa thì `ro` sẽ thay đổi nhẹ, vì `ro = 1/(λID)` phụ thuộc vào dòng phân cực.
+
+Sau đó, tính điện trở đầu ra tại điểm đã chọn `VDS = 1,3 V` theo công thức đề bài:
 
 \[
 r_o\approx\frac{1}{\lambda I_D(1{,}3\,\mathrm V)}.

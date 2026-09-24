@@ -36,7 +36,9 @@ I_{D0}\approx I_D(0.6\,\mathrm V)-0.6g_{ds},\qquad
 \lambda\approx\frac{g_{ds}}{I_{D0}}.
 \]
 
-Then calculate output resistance at `VDS = 1.3 V` using the requested formula:
+The assignment does not specify which saturation-region bias point should be used for `ID` in the `ro` formula. Here we choose `VDS = 1.3 V`, the midpoint of the 0.6–2.0 V interval used for the saturation fit. This keeps the reported resistance away from both fit endpoints and gives one representative operating point for comparing the five devices. A different saturation-region `VDS` would give a slightly different `ro`, because `ro = 1/(λID)` depends on the bias current.
+
+Then calculate output resistance at the selected `VDS = 1.3 V` using the requested formula:
 
 \[
 r_o\approx\frac{1}{\lambda I_D(1.3\,\mathrm V)}.
