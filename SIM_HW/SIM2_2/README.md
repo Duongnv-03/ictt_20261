@@ -1,6 +1,10 @@
 # SIM.2.2 — Điều chế chiều dài kênh của NMOS
 
-Mở `SIM2_2_NMOS.asc` bằng LTspice. Thư mục này có model NMOS 035 (`5827_035.lib`) và symbol (`nmos_035.asy`), nên schematic không phụ thuộc đường dẫn riêng của máy. Schematic quét toàn bộ `VDS = 0–2 V`; báo cáo, đồ thị và CSV lưu đủ đặc tuyến từ vùng triode đến vùng bão hòa. Các phép tính `λ` và `ro` chỉ dùng đoạn bão hòa `0,6–2,0 V`.
+Để mở mô phỏng, mở [`Simulation/SIM2_2_NMOS.asc`](Simulation/SIM2_2_NMOS.asc) bằng LTspice. Thư mục `Simulation/` gom schematic, netlist, model 035, symbol NMOS, dữ liệu CSV, đồ thị và các file `.raw`, `.log`, `.net`, cache LTspice sinh ra. Model và symbol nằm cạnh schematic nên không phụ thuộc đường dẫn riêng của máy.
 
-- Báo cáo tiếng Việt: `SIM2_2_NMOS_Report_VI.md` và `SIM2_2_NMOS_Report_VI.pdf`.
-- Báo cáo tiếng Anh: `SIM2_2_NMOS_Report.md` và `SIM2_2_NMOS_Report.pdf`.
+Thư mục `Report/` chỉ chứa báo cáo Markdown và PDF:
+
+- Tiếng Việt: [Markdown](Report/SIM2_2_NMOS_Report_VI.md) · [PDF](Report/SIM2_2_NMOS_Report_VI.pdf)
+- Tiếng Anh: [Markdown](Report/SIM2_2_NMOS_Report.md) · [PDF](Report/SIM2_2_NMOS_Report.pdf)
+
+Schematic quét toàn bộ `VDS = 0–2 V` để thể hiện cả vùng triode và vùng bão hòa. Các phép tính `λ` và `ro` chỉ dùng đoạn bão hòa `0,6–2,0 V`.

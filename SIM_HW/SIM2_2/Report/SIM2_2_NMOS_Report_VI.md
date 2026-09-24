@@ -60,11 +60,11 @@ Dữ liệu từ 0 V được dùng để vẽ toàn bộ đặc tuyến; các �
 
 Vùng tô xám là vùng triode ở điện áp thấp. Vùng tô xanh đánh dấu khoảng 0,6–2,0 V dùng để ước lượng `λ`.
 
-![Đặc tuyến đầy đủ của NMOS 035 và khoảng dùng để tính trong vùng bão hòa](SIM2_2_NMOS_ID_vs_VDS.png)
+![Đặc tuyến đầy đủ của NMOS 035 và khoảng dùng để tính trong vùng bão hòa](../Simulation/SIM2_2_NMOS_ID_vs_VDS.png)
 
 ### Hệ số điều chế chiều dài kênh và điện trở đầu ra theo chiều dài kênh
 
-![Hệ số lambda và điện trở đầu ra theo chiều dài kênh](SIM2_2_NMOS_lambda_ro_vs_L.png)
+![Hệ số lambda và điện trở đầu ra theo chiều dài kênh](../Simulation/SIM2_2_NMOS_lambda_ro_vs_L.png)
 
 ## Nhận xét
 
@@ -74,7 +74,7 @@ Khi `L` tăng từ 1 μm lên 20 μm, `λ` giảm từ 0,022876 V⁻¹ xuống 0
 
 ## Các tệp sử dụng
 
-- `SIM2_2_NMOS.asc` — schematic LTspice, quét toàn dải `VDS` từ 0 đến 2,0 V và đo `λ`, `ro` trên đoạn bão hòa.
-- `SIM2_2_NMOS_VTH.cir` — netlist hiệu chỉnh điện áp ngưỡng tại `VDS = 1 V`.
-- `SIM2_2_NMOS_ID_VDS.csv` — dữ liệu đặc tuyến đầu ra đầy đủ từ 0 đến 2 V.
-- `SIM2_2_NMOS_results.csv` — thông số tính từ đoạn bão hòa 0,6–2,0 V.
+- `../Simulation/SIM2_2_NMOS.asc` — schematic LTspice, quét toàn dải `VDS` từ 0 đến 2,0 V và đo `λ`, `ro` trên đoạn bão hòa.
+- `../Simulation/SIM2_2_NMOS_VTH.cir` — netlist hiệu chỉnh điện áp ngưỡng tại `VDS = 1 V`.
+- `../Simulation/SIM2_2_NMOS_ID_VDS.csv` — dữ liệu đặc tuyến đầu ra đầy đủ từ 0 đến 2 V.
+- `../Simulation/SIM2_2_NMOS_results.csv` — thông số tính từ đoạn bão hòa 0,6–2,0 V.

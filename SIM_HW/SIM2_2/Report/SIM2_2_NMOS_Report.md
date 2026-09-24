@@ -60,11 +60,11 @@ The sweep starts at 0 V for the plot, but samples below 0.6 V are not used in th
 
 The shaded low-voltage region shows the triode portion. The blue shading marks the 0.6–2.0 V interval used to estimate `λ`.
 
-![Full 035 NMOS output characteristics with saturation fit interval marked](SIM2_2_NMOS_ID_vs_VDS.png)
+![Full 035 NMOS output characteristics with saturation fit interval marked](../Simulation/SIM2_2_NMOS_ID_vs_VDS.png)
 
 ### Channel-length modulation and output resistance versus channel length
 
-![Lambda and output resistance versus channel length](SIM2_2_NMOS_lambda_ro_vs_L.png)
+![Lambda and output resistance versus channel length](../Simulation/SIM2_2_NMOS_lambda_ro_vs_L.png)
 
 ## Discussion
 
@@ -74,7 +74,7 @@ As `L` increases from 1 μm to 20 μm, `λ` decreases from 0.022876 V⁻¹ to 0.
 
 ## Files
 
-- `SIM2_2_NMOS.asc` — LTspice schematic; sweeps the full `VDS` range from 0 to 2.0 V and measures `λ` and `ro` over the saturation interval.
-- `SIM2_2_NMOS_VTH.cir` — operating-point threshold calibration at `VDS = 1 V`.
-- `SIM2_2_NMOS_ID_VDS.csv` — full 0–2 V output-characteristic data.
-- `SIM2_2_NMOS_results.csv` — metrics calculated from the 0.6–2.0 V saturation interval.
+- `../Simulation/SIM2_2_NMOS.asc` — LTspice schematic; sweeps the full `VDS` range from 0 to 2.0 V and measures `λ` and `ro` over the saturation interval.
+- `../Simulation/SIM2_2_NMOS_VTH.cir` — operating-point threshold calibration at `VDS = 1 V`.
+- `../Simulation/SIM2_2_NMOS_ID_VDS.csv` — full 0–2 V output-characteristic data.
+- `../Simulation/SIM2_2_NMOS_results.csv` — metrics calculated from the 0.6–2.0 V saturation interval.

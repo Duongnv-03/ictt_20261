@@ -8,4 +8,4 @@ LTspice files, reports, and simulation results for the homework assignments are 
 - `SIM3_2/` — SIM.3.2
 - `SIM4_1/` — SIM.4.1
 
-Each assignment folder is self-contained. For SIM.2.2, open `SIM2_2_NMOS.asc` in LTspice; the model and symbol it needs are in the same folder. The Markdown report and PDF, plots, CSV data, and generated LTspice files are stored alongside it.
+For SIM.2.2, simulation assets are grouped in `SIM2_2/Simulation/` and English/Vietnamese reports are grouped in `SIM2_2/Report/`. Open `SIM2_2/Simulation/SIM2_2_NMOS.asc` in LTspice; its model and symbol are in the same folder.
