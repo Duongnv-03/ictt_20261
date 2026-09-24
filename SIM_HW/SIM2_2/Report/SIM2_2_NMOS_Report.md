@@ -36,25 +36,25 @@ I_{D0}\approx I_D(0.6\,\mathrm V)-0.6g_{ds},\qquad
 \lambda\approx\frac{g_{ds}}{I_{D0}}.
 \]
 
-The assignment does not specify which saturation-region bias point should be used for `ID` in the `ro` formula. Here we choose `VDS = 1.3 V`, the midpoint of the 0.6–2.0 V interval used for the saturation fit. This keeps the reported resistance away from both fit endpoints and gives one representative operating point for comparing the five devices. A different saturation-region `VDS` would give a slightly different `ro`, because `ro = 1/(λID)` depends on the bias current.
+The assignment does not specify which saturation-region bias point should be used for `ID` in the `ro` formula. Here we choose `VDS = 1.5 V` because it is a round value clearly inside the 0.6–2.0 V saturation interval. A different saturation-region `VDS` would give a slightly different `ro`, because `ro = 1/(λID)` depends on the bias current.
 
-Then calculate output resistance at the selected `VDS = 1.3 V` using the requested formula:
+Then calculate output resistance at the selected `VDS = 1.5 V` using the requested formula:
 
 \[
-r_o\approx\frac{1}{\lambda I_D(1.3\,\mathrm V)}.
+r_o\approx\frac{1}{\lambda I_D(1.5\,\mathrm V)}.
 \]
 
 The sweep starts at 0 V for the plot, but samples below 0.6 V are not used in these saturation-region calculations.
 
 ## Results
 
-| L (μm) | W (μm) | ID at 1.3 V (μA) | Slope gds (μS) | λ (V⁻¹) | ro (kΩ) |
+| L (μm) | W (μm) | ID at 1.5 V (μA) | Slope gds (μS) | λ (V⁻¹) | ro (kΩ) |
 |---:|---:|---:|---:|---:|---:|
-| 1 | 10 | 158.037 | 3.489 | 0.022876 | 276.611 |
-| 2 | 20 | 165.261 | 2.464 | 0.015263 | 396.453 |
-| 5 | 50 | 169.485 | 1.729 | 0.010358 | 569.653 |
-| 10 | 100 | 170.948 | 1.379 | 0.008162 | 716.706 |
-| 20 | 200 | 171.633 | 1.097 | 0.006455 | 902.644 |
+| 1 | 10 | 158.519 | 3.489 | 0.022876 | 275.769 |
+| 2 | 20 | 165.615 | 2.464 | 0.015263 | 395.605 |
+| 5 | 50 | 169.750 | 1.729 | 0.010358 | 568.763 |
+| 10 | 100 | 171.163 | 1.379 | 0.008162 | 715.806 |
+| 20 | 200 | 171.800 | 1.097 | 0.006455 | 901.765 |
 
 ## Plots
 
@@ -72,7 +72,7 @@ The shaded low-voltage region shows the triode portion. The blue shading marks t
 
 The full `ID`–`VDS` plot shows the nearly linear rise at low `VDS`, followed by the flatter saturation-region curves. Only the latter interval is used to estimate channel-length modulation, as required by the saturation approximation.
 
-As `L` increases from 1 μm to 20 μm, `λ` decreases from 0.022876 V⁻¹ to 0.006455 V⁻¹, while `ro` increases from 276.6 kΩ to 902.6 kΩ. The output curves become flatter for longer devices, showing weaker channel-length modulation. The current at 1.3 V rises modestly from 158.0 μA to 171.6 μA even though `W/L` and nominal overdrive are held constant. This is the behavior of the supplied BSIM3 model across these geometries; the ideal long-channel square-law model would predict less variation.
+As `L` increases from 1 μm to 20 μm, `λ` decreases from 0.022876 V⁻¹ to 0.006455 V⁻¹, while `ro` increases from 275.8 kΩ to 901.8 kΩ. The output curves become flatter for longer devices, showing weaker channel-length modulation. The current at 1.5 V rises modestly from 158.5 μA to 171.8 μA even though `W/L` and nominal overdrive are held constant. This is the behavior of the supplied BSIM3 model across these geometries; the ideal long-channel square-law model would predict less variation.
 
 ## Files
 

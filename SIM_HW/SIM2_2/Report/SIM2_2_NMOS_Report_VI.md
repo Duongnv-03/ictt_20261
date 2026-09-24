@@ -38,25 +38,25 @@ I_{D0}\approx I_D(0{,}6\,\mathrm V)-0{,}6g_{ds},\qquad
 \lambda\approx\frac{g_{ds}}{I_{D0}}.
 \]
 
-Đề không chỉ định phải lấy `ID` tại giá trị `VDS` nào trong vùng bão hòa để tính `ro`. Trong báo cáo này, chọn `VDS = 1,3 V`, là trung điểm của khoảng 0,6–2,0 V dùng để khớp độ dốc vùng bão hòa. Cách chọn này tránh lấy ngay tại hai đầu khoảng khớp và đại diện cho một điểm làm việc giữa dải để so sánh năm transistor. Nếu chọn một `VDS` khác trong vùng bão hòa thì `ro` sẽ thay đổi nhẹ, vì `ro = 1/(λID)` phụ thuộc vào dòng phân cực.
+Đề không chỉ định phải lấy `ID` tại giá trị `VDS` nào trong vùng bão hòa để tính `ro`. Trong báo cáo này, chọn `VDS = 1,5 V` vì đây là giá trị tròn, nằm rõ trong khoảng 0,6–2,0 V dùng để khớp độ dốc vùng bão hòa và thuận tiện đọc kết quả. Nếu chọn một `VDS` khác trong vùng bão hòa thì `ro` sẽ thay đổi nhẹ, vì `ro = 1/(λID)` phụ thuộc vào dòng phân cực.
 
-Sau đó, tính điện trở đầu ra tại điểm đã chọn `VDS = 1,3 V` theo công thức đề bài:
+Sau đó, tính điện trở đầu ra tại điểm đã chọn `VDS = 1,5 V` theo công thức đề bài:
 
 \[
-r_o\approx\frac{1}{\lambda I_D(1{,}3\,\mathrm V)}.
+r_o\approx\frac{1}{\lambda I_D(1{,}5\,\mathrm V)}.
 \]
 
 Dữ liệu từ 0 V được dùng để vẽ toàn bộ đặc tuyến; các điểm dưới 0,6 V không dùng để tính các thông số trong vùng bão hòa.
 
 ### (a.2) Kết quả tính toán
 
-| L (μm) | W (μm) | ID tại 1,3 V (μA) | Độ dốc gds (μS) | λ (V⁻¹) | ro (kΩ) |
+| L (μm) | W (μm) | ID tại 1,5 V (μA) | Độ dốc gds (μS) | λ (V⁻¹) | ro (kΩ) |
 |---:|---:|---:|---:|---:|---:|
-| 1 | 10 | 158,037 | 3,489 | 0,022876 | 276,611 |
-| 2 | 20 | 165,261 | 2,464 | 0,015263 | 396,453 |
-| 5 | 50 | 169,485 | 1,729 | 0,010358 | 569,653 |
-| 10 | 100 | 170,948 | 1,379 | 0,008162 | 716,706 |
-| 20 | 200 | 171,633 | 1,097 | 0,006455 | 902,644 |
+| 1 | 10 | 158,519 | 3,489 | 0,022876 | 275,769 |
+| 2 | 20 | 165,615 | 2,464 | 0,015263 | 395,605 |
+| 5 | 50 | 169,750 | 1,729 | 0,010358 | 568,763 |
+| 10 | 100 | 171,163 | 1,379 | 0,008162 | 715,806 |
+| 20 | 200 | 171,800 | 1,097 | 0,006455 | 901,765 |
 
 ## (b) Đồ thị, so sánh và nhận xét
 
@@ -76,7 +76,7 @@ Vùng tô xám là vùng triode ở điện áp thấp. Vùng tô xanh đánh d�
 
 Đồ thị đầy đủ `ID`–`VDS` cho thấy dòng tăng gần tuyến tính ở `VDS` thấp, sau đó các đường đặc tuyến phẳng hơn khi transistor vào vùng bão hòa. Chỉ đoạn bão hòa được dùng để ước lượng điều chế chiều dài kênh, phù hợp với công thức gần đúng của bài.
 
-Khi `L` tăng từ 1 μm lên 20 μm, `λ` giảm từ 0,022876 V⁻¹ xuống 0,006455 V⁻¹, trong khi `ro` tăng từ 276,6 kΩ lên 902,6 kΩ. Đường đặc tuyến đầu ra phẳng hơn khi kênh dài hơn, cho thấy điều chế chiều dài kênh yếu đi. Dòng điện tại 1,3 V tăng nhẹ từ 158,0 μA lên 171,6 μA dù `W/L` và overdrive danh định được giữ cố định. Đây là đặc tính của model BSIM3 được cung cấp trên các kích thước đang xét; mô hình bình phương lý tưởng cho kênh dài sẽ dự đoán mức biến thiên nhỏ hơn.
+Khi `L` tăng từ 1 μm lên 20 μm, `λ` giảm từ 0,022876 V⁻¹ xuống 0,006455 V⁻¹, trong khi `ro` tăng từ 275,8 kΩ lên 901,8 kΩ. Đường đặc tuyến đầu ra phẳng hơn khi kênh dài hơn, cho thấy điều chế chiều dài kênh yếu đi. Dòng điện tại 1,5 V tăng nhẹ từ 158,5 μA lên 171,8 μA dù `W/L` và overdrive danh định được giữ cố định. Đây là đặc tính của model BSIM3 được cung cấp trên các kích thước đang xét; mô hình bình phương lý tưởng cho kênh dài sẽ dự đoán mức biến thiên nhỏ hơn.
 
 ## Các tệp sử dụng
 

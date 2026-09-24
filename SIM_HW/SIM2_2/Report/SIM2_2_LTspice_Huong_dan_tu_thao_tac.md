@@ -72,7 +72,7 @@ Nút **Simulate → Configure Analysis** dùng để tạo nhanh các lệnh ph�
 .meas DC GDS PARAM (IDHIGH-IDLOW)/1.4
 .meas DC IDZERO PARAM IDLOW-GDS*0.6
 .meas DC LAMBDA PARAM GDS/IDZERO
-.meas DC IDMID FIND -I(VDS) AT=1.3
+.meas DC IDMID FIND -I(VDS) AT=1.5
 .meas DC ROUT PARAM 1/(LAMBDA*IDMID)
 .option numdgt=12
 ```
@@ -219,11 +219,11 @@ Tiếp theo, kéo đường thẳng có độ dốc `GDS` ngược về `VDS = 0
 #### Dòng điện dùng để tính điện trở đầu ra
 
 ```spice
-.meas DC IDMID FIND -I(VDS) AT=1.3
+.meas DC IDMID FIND -I(VDS) AT=1.5
 .meas DC ROUT PARAM 1/(LAMBDA*IDMID)
 ```
 
-`1,3 V` là trung điểm của khoảng `0,6–2,0 V`, vì `(0,6 + 2,0)/2 = 1,3 V`. Đây là điểm phân cực đại diện do mô phỏng chọn, không phải giá trị bắt buộc của đề. Lệnh cuối dùng công thức `ro = 1/(λID)`. Nếu chọn một điểm `VDS` khác trong vùng bão hòa thì `ID` và kết quả `ro` sẽ thay đổi nhẹ.
+`1,5 V` là một giá trị tròn nằm trong vùng bão hòa `0,6–2,0 V`, thuận tiện đọc và so sánh. Đây là điểm phân cực đại diện do mô phỏng chọn, không phải giá trị bắt buộc của đề. Lệnh cuối dùng công thức `ro = 1/(λID)`. Nếu chọn một điểm `VDS` khác trong vùng bão hòa thì `ID` và kết quả `ro` sẽ thay đổi nhẹ.
 
 #### Dòng cuối: số chữ số trong log
 
@@ -265,10 +265,10 @@ Sau khi chạy, chọn **View → SPICE Error Log**. Các nhóm kết quả có 
 - `GDS`: độ dốc trung bình trên đoạn `0,6–2,0 V`.
 - `IDZERO`: giao điểm ngoại suy tại `VDS = 0`.
 - `LAMBDA`: `GDS / IDZERO`.
-- `IDMID`: `ID` tại `VDS = 1,3 V`.
+- `IDMID`: `ID` tại `VDS = 1,5 V`.
 - `ROUT`: `1 / (LAMBDA × IDMID)`.
 
-Đề không quy định phải lấy `ID` tại `VDS` nào để tính `ro`. Báo cáo chọn `1,3 V`, là trung điểm của khoảng `0,6–2,0 V`, làm điểm phân cực đại diện. Chọn điểm khác trong vùng bão hòa sẽ cho `ro` hơi khác vì `ro = 1/(λID)` phụ thuộc vào dòng `ID`.
+Đề không quy định phải lấy `ID` tại `VDS` nào để tính `ro`. Báo cáo chọn `1,5 V` vì đây là giá trị tròn nằm trong vùng `0,6–2,0 V`. Chọn điểm khác trong vùng bão hòa sẽ cho `ro` hơi khác vì `ro = 1/(λID)` phụ thuộc vào dòng `ID`.
 
 ## 7. Tự kiểm tra phép tính
 
@@ -277,14 +277,14 @@ Ví dụ với `L = 1 µm`, đọc trong log:
 ```text
 IDLOW  = 154.6159 µA
 IDHIGH = 159.5005 µA
-IDMID  = 158.0366 µA
+IDMID  = 158.5193 µA
 ```
 
 ```text
 gds    = (159.5005 - 154.6159) µA / 1.4 V = 3.4890 µS
 IDZERO = 154.6159 µA - 0.6 × 3.4890 µA = 152.5225 µA
 lambda = 3.4890 µS / 152.5225 µA = 0.0228756 V^-1
-ro     = 1 / (0.0228756 × 158.0366 µA) = 276.6 kΩ
+ro     = 1 / (0.0228756 × 158.5193 µA) = 275.8 kΩ
 ```
 
 ## 8. Lỗi thường gặp
