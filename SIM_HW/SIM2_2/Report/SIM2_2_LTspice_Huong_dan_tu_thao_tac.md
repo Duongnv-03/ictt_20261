@@ -91,6 +91,161 @@ Nút **Simulate → Configure Analysis** dùng để tạo nhanh các lệnh ph�
 
 `VOV = 0,5 V` là overdrive danh định. Các giá trị `VBIAS` đã được hiệu chỉnh tại `VDS = 1 V` sao cho `VGS − Vth ≈ 0,5 V` cho từng chiều dài.
 
+### 4.1. Vì sao khối lệnh này hoạt động?
+
+Nút `.t` chỉ đặt một hộp văn bản lên schematic. Khi bấm **Run**, LTspice nhận mỗi dòng bắt đầu bằng dấu chấm là một **SPICE Directive**, đọc chúng cùng với các linh kiện trên sơ đồ, rồi tạo netlist để giải mạch. Vì vậy `.t` không phải là một phép phân tích riêng; nó là cách nhập lệnh cho bộ mô phỏng.
+
+Các dòng trong schematic tương đương với ý tưởng sau:
+
+```text
+VGS: đặt điện áp cổng bằng {VBIAS}
+VDS: nguồn áp ở cực drain, được lệnh .dc quét
+M1 : NMOS model NM, W={WIDTH}, L={LCH}
+```
+
+LTspice thay các biểu thức trong dấu ngoặc nhọn bằng giá trị tham số trước khi giải mạch. Ví dụ, nếu `IDX=3` thì:
+
+```text
+LCH   = 5u
+WIDTH = 10 × 5u = 50u
+VBIAS = 1.006 V
+```
+
+#### Dòng 1: nạp model
+
+```spice
+.include "5827_035.lib"
+```
+
+LTspice đọc file thư viện và tìm model có tên `NM`. Giá trị **Value** của transistor trong schematic cũng phải là `NM`; nếu tên không khớp, LTspice báo `Unknown model`.
+
+#### Dòng 2: khai báo overdrive
+
+```spice
+.param VOV=0.5
+```
+
+Lệnh này tạo tham số `VOV = 0,5 V`. Trong schematic hiện tại, `VOV` dùng để ghi rõ mục tiêu thiết kế và giải thích cách chọn điện áp cổng; nó không tự động tính lại `VBIAS`. Các giá trị `VBIAS` bên dưới là bảng đã hiệu chỉnh riêng cho từng chiều dài từ kết quả `Vth`.
+
+#### Dòng 3: tạo năm lần chạy
+
+```spice
+.step param IDX 1 5 1
+```
+
+LTspice chạy lại toàn bộ phân tích với `IDX = 1, 2, 3, 4, 5`. Mỗi giá trị `IDX` tạo một đường đặc tuyến riêng. Đây là vòng lặp bên ngoài; bên trong mỗi lần chạy còn có vòng quét `VDS`.
+
+#### Dòng 4: chọn chiều dài kênh
+
+```spice
+.param LCH=table(IDX,1,1u,2,2u,3,5u,4,10u,5,20u)
+```
+
+Hàm `table(x, x1,y1, x2,y2, ...)` ánh xạ giá trị đầu vào sang giá trị đầu ra:
+
+| `IDX` | `LCH` |
+|---:|---:|
+| 1 | 1 µm |
+| 2 | 2 µm |
+| 3 | 5 µm |
+| 4 | 10 µm |
+| 5 | 20 µm |
+
+Ký hiệu `u` là micro, nên `1u = 1×10⁻⁶` theo đơn vị SI của SPICE.
+
+#### Dòng 5: giữ tỷ số W/L
+
+```spice
+.param WIDTH={10*LCH}
+```
+
+Với mỗi lần chạy, bề rộng được đặt bằng `10×LCH`. Do đó `W/L = 10` cho cả năm transistor. Tham số này được dùng trong thuộc tính `W={WIDTH}` của M1 và trong các biểu thức diện tích/perimeter `AD`, `AS`, `PD`, `PS`.
+
+#### Dòng 6: chọn điện áp cổng
+
+```spice
+.param VBIAS=table(IDX,1,1.036,2,1.018,3,1.006,4,1.002,5,1.000)
+```
+
+Bảng này trả về điện áp cấp cho nguồn `VGS`, vì giá trị nguồn trong schematic là `{VBIAS}`. Mỗi chiều dài có `VGS` hơi khác nhau để tại điểm tham chiếu `VDS = 1 V` đạt gần `VOV = VGS − Vth ≈ 0,5 V`. Trong một lần `.dc`, `VGS` giữ cố định; chỉ `VDS` thay đổi.
+
+#### Dòng 7: quét điện áp drain
+
+```spice
+.dc VDS 0 2.0 0.01
+```
+
+Nguồn có tên `VDS` được quét từ `0 V` đến `2 V`, mỗi bước `0,01 V`. Mỗi giá trị `IDX` có `(2,0 − 0)/0,01 + 1 = 201` điểm. Với năm giá trị `IDX`, LTspice giải khoảng `5×201 = 1005` điểm làm việc và tạo năm đường `ID–VDS`.
+
+Ở `VDS` nhỏ, transistor ở vùng triode; khi `VDS` vượt xấp xỉ `VGS−Vth ≈ VOV`, transistor chuyển sang vùng bão hòa. Vì vậy đồ thị được quét từ 0 để thấy toàn bộ đặc tuyến, nhưng phần tính `λ` chỉ lấy từ `0,6 V` trở lên.
+
+#### Vì sao dùng `-I(VDS)`?
+
+LTspice định nghĩa `I(VDS)` là dòng đi **vào cực dương** của nguồn áp. Trong mạch này dòng thực tế đi từ nguồn `VDS` vào drain rồi qua transistor xuống mass, tức là đi ra khỏi cực dương của nguồn. Vì thế LTspice ghi dòng nguồn là số âm và dòng drain được lấy bằng `ID = −I(VDS)`.
+
+#### Các dòng `.meas`: lấy số liệu sau khi quét
+
+```spice
+.meas DC IDLOW FIND -I(VDS) AT=0.6
+.meas DC IDHIGH FIND -I(VDS) AT=2.0
+```
+
+Sau khi hoàn tất đường quét, hai lệnh này lấy dòng tại `VDS = 0,6 V` và `VDS = 2,0 V`. Từ hai điểm đó, độ dốc trung bình trong vùng bão hòa là:
+
+```spice
+.meas DC GDS PARAM (IDHIGH-IDLOW)/1.4
+```
+
+Số `1.4` chính là `2,0−0,6`. Đại lượng này có đơn vị siemens:
+
+```text
+gds = ΔID/ΔVDS
+```
+
+Tiếp theo, kéo đường thẳng có độ dốc `GDS` ngược về `VDS = 0`:
+
+```spice
+.meas DC IDZERO PARAM IDLOW-GDS*0.6
+```
+
+Đây là dòng giao điểm ngoại suy `IDZERO`. Từ đó:
+
+```spice
+.meas DC LAMBDA PARAM GDS/IDZERO
+```
+
+áp dụng công thức `λ = gds/IDZERO`, với đơn vị `V⁻¹`. Các điểm dưới `0,6 V` không dùng trong phép tính này vì chúng còn chịu ảnh hưởng mạnh của vùng triode và điểm gối.
+
+#### Dòng điện dùng để tính điện trở đầu ra
+
+```spice
+.meas DC IDMID FIND -I(VDS) AT=1.3
+.meas DC ROUT PARAM 1/(LAMBDA*IDMID)
+```
+
+`1,3 V` là trung điểm của khoảng `0,6–2,0 V`, vì `(0,6 + 2,0)/2 = 1,3 V`. Đây là điểm phân cực đại diện do mô phỏng chọn, không phải giá trị bắt buộc của đề. Lệnh cuối dùng công thức `ro = 1/(λID)`. Nếu chọn một điểm `VDS` khác trong vùng bão hòa thì `ID` và kết quả `ro` sẽ thay đổi nhẹ.
+
+#### Dòng cuối: số chữ số trong log
+
+```spice
+.option numdgt=12
+```
+
+Lệnh này yêu cầu SPICE in nhiều chữ số hơn trong **SPICE Error Log**. Nó cải thiện cách hiển thị kết quả, không biến mô hình thành chính xác tuyệt đối hơn.
+
+### 4.2. Trình tự LTspice thực sự thực hiện
+
+Khi bấm **Run**, có thể hình dung LTspice làm theo thứ tự:
+
+1. Đọc schematic và file `5827_035.lib` để biết mạch gồm những linh kiện và model nào.
+2. Chọn `IDX = 1`, tính `LCH`, `WIDTH`, `VBIAS`, rồi quét `VDS` từ 0 đến 2 V.
+3. Tại từng điểm `VDS`, giải phương trình phi tuyến của NMOS để tìm điện áp nút và dòng điện.
+4. Lưu đường cong `-I(VDS)` của lần chạy đó.
+5. Thực hiện lại bước 2–4 cho `IDX = 2, 3, 4, 5`.
+6. Sau mỗi đường quét, thực hiện các lệnh `.meas` và ghi kết quả vào **SPICE Error Log**.
+
+Do đó một khối `.t` ngắn có thể tạo ra nhiều kết quả: `.step` tạo các trường hợp, `.dc` tạo các điểm trên mỗi trường hợp, còn `.meas` đọc dữ liệu đã tạo để tính các thông số cuối cùng.
+
 ## 5. Chạy và xem đồ thị
 
 1. Nhấn **Run** hoặc `F9`.
