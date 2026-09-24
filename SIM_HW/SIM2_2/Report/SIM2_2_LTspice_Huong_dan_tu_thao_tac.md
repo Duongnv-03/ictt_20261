@@ -67,11 +67,10 @@ Nút **Simulate → Configure Analysis** dùng để tạo nhanh các lệnh ph�
 .param WIDTH={10*LCH}
 .param VBIAS=table(IDX,1,1.036,2,1.018,3,1.006,4,1.002,5,1.000)
 .dc VDS 0 2.0 0.01
-.meas DC IDLOW FIND -I(VDS) AT=0.6
+.meas DC ID0 FIND -I(VDS) AT=0.5
 .meas DC IDHIGH FIND -I(VDS) AT=2.0
-.meas DC GDS PARAM (IDHIGH-IDLOW)/1.4
-.meas DC IDZERO PARAM IDLOW-GDS*0.6
-.meas DC LAMBDA PARAM GDS/IDZERO
+.meas DC GDS PARAM (IDHIGH-ID0)/1.5
+.meas DC LAMBDA PARAM GDS/ID0
 .meas DC IDMID FIND -I(VDS) AT=1.5
 .meas DC ROUT PARAM 1/(LAMBDA*IDMID)
 .option numdgt=12
@@ -177,7 +176,7 @@ Bảng này trả về điện áp cấp cho nguồn `VGS`, vì giá trị ngu�
 
 Nguồn có tên `VDS` được quét từ `0 V` đến `2 V`, mỗi bước `0,01 V`. Mỗi giá trị `IDX` có `(2,0 − 0)/0,01 + 1 = 201` điểm. Với năm giá trị `IDX`, LTspice giải khoảng `5×201 = 1005` điểm làm việc và tạo năm đường `ID–VDS`.
 
-Ở `VDS` nhỏ, transistor ở vùng triode; khi `VDS` vượt xấp xỉ `VGS−Vth ≈ VOV`, transistor chuyển sang vùng bão hòa. Vì vậy đồ thị được quét từ 0 để thấy toàn bộ đặc tuyến, nhưng phần tính `λ` chỉ lấy từ `0,6 V` trở lên.
+Ở `VDS` nhỏ, transistor ở vùng triode; khi `VDS` vượt xấp xỉ `VGS−Vth ≈ VOV`, transistor chuyển sang vùng bão hòa. Vì vậy đồ thị được quét từ 0 để thấy toàn bộ đặc tuyến, nhưng phần tính `λ` chỉ lấy đoạn `0,5–2,0 V`.
 
 #### Vì sao dùng `-I(VDS)`?
 
@@ -186,35 +185,29 @@ LTspice định nghĩa `I(VDS)` là dòng đi **vào cực dương** của ngu�
 #### Các dòng `.meas`: lấy số liệu sau khi quét
 
 ```spice
-.meas DC IDLOW FIND -I(VDS) AT=0.6
+.meas DC ID0 FIND -I(VDS) AT=0.5
 .meas DC IDHIGH FIND -I(VDS) AT=2.0
 ```
 
-Sau khi hoàn tất đường quét, hai lệnh này lấy dòng tại `VDS = 0,6 V` và `VDS = 2,0 V`. Từ hai điểm đó, độ dốc trung bình trong vùng bão hòa là:
+Sau khi hoàn tất đường quét, hai lệnh này lấy `ID0` tại `VDS = 0,5 V` và dòng tại `VDS = 2,0 V`. Từ hai điểm đó, độ dốc trung bình trong đoạn bão hòa đã chọn là:
 
 ```spice
-.meas DC GDS PARAM (IDHIGH-IDLOW)/1.4
+.meas DC GDS PARAM (IDHIGH-ID0)/1.5
 ```
 
-Số `1.4` chính là `2,0−0,6`. Đại lượng này có đơn vị siemens:
+Số `1.5` chính là `2,0−0,5`. Đại lượng này có đơn vị siemens:
 
 ```text
 gds = ΔID/ΔVDS
 ```
 
-Tiếp theo, kéo đường thẳng có độ dốc `GDS` ngược về `VDS = 0`:
+`ID0` được lấy trực tiếp tại đúng mốc `VDS = 0,5 V`, trùng với `VOV` danh định:
 
 ```spice
-.meas DC IDZERO PARAM IDLOW-GDS*0.6
+.meas DC LAMBDA PARAM GDS/ID0
 ```
 
-Đây là dòng giao điểm ngoại suy `IDZERO`. Từ đó:
-
-```spice
-.meas DC LAMBDA PARAM GDS/IDZERO
-```
-
-áp dụng công thức `λ = gds/IDZERO`, với đơn vị `V⁻¹`. Các điểm dưới `0,6 V` không dùng trong phép tính này vì chúng còn chịu ảnh hưởng mạnh của vùng triode và điểm gối.
+Do đó, áp dụng trực tiếp công thức `λ = gds/ID0`, với đơn vị `V⁻¹`. Các điểm dưới `0,5 V` không dùng trong phép tính này vì chúng nằm trước ranh giới bão hòa danh định.
 
 #### Dòng điện dùng để tính điện trở đầu ra
 
@@ -223,7 +216,7 @@ Tiếp theo, kéo đường thẳng có độ dốc `GDS` ngược về `VDS = 0
 .meas DC ROUT PARAM 1/(LAMBDA*IDMID)
 ```
 
-`1,5 V` là một giá trị tròn nằm trong vùng bão hòa `0,6–2,0 V`, thuận tiện đọc và so sánh. Đây là điểm phân cực đại diện do mô phỏng chọn, không phải giá trị bắt buộc của đề. Lệnh cuối dùng công thức `ro = 1/(λID)`. Nếu chọn một điểm `VDS` khác trong vùng bão hòa thì `ID` và kết quả `ro` sẽ thay đổi nhẹ.
+`1,5 V` là một giá trị tròn nằm trong vùng bão hòa `0,5–2,0 V`, thuận tiện đọc và so sánh. Đây là điểm phân cực đại diện do mô phỏng chọn, không phải giá trị bắt buộc của đề. Lệnh cuối dùng công thức `ro = 1/(λID)`. Nếu chọn một điểm `VDS` khác trong vùng bão hòa thì `ID` và kết quả `ro` sẽ thay đổi nhẹ.
 
 #### Dòng cuối: số chữ số trong log
 
@@ -254,37 +247,35 @@ Do đó một khối `.t` ngắn có thể tạo ra nhiều kết quả: `.step`
 4. Nhập `-I(VDS)` để vẽ dòng drain.
 5. Dùng **View → Step Legend** để xem đường nào ứng với `IDX = 1...5`.
 
-Đồ thị từ `VDS = 0` đến `2 V` có vùng triode ở điện áp thấp và vùng bão hòa khi `VDS` vượt xấp xỉ `VOV ≈ 0,5 V`. Toàn bộ dải được giữ lại để quan sát; khi tính `λ`, chỉ dùng đoạn `0,6–2,0 V`.
+Đồ thị từ `VDS = 0` đến `2 V` có vùng triode ở điện áp thấp và vùng bão hòa khi `VDS` vượt xấp xỉ `VOV ≈ 0,5 V`. Toàn bộ dải được giữ lại để quan sát; khi tính `λ`, chỉ dùng đoạn `0,5–2,0 V`.
 
 ## 6. Đọc SPICE Error Log
 
 Sau khi chạy, chọn **View → SPICE Error Log**. Các nhóm kết quả có ý nghĩa:
 
-- `IDLOW`: `ID` tại `VDS = 0,6 V`.
+- `ID0`: `ID` tại `VDS = 0,5 V`, được dùng làm dòng `ID0`.
 - `IDHIGH`: `ID` tại `VDS = 2,0 V`.
-- `GDS`: độ dốc trung bình trên đoạn `0,6–2,0 V`.
-- `IDZERO`: giao điểm ngoại suy tại `VDS = 0`.
-- `LAMBDA`: `GDS / IDZERO`.
+- `GDS`: độ dốc trung bình trên đoạn `0,5–2,0 V`.
+- `LAMBDA`: `GDS / ID0`.
 - `IDMID`: `ID` tại `VDS = 1,5 V`.
 - `ROUT`: `1 / (LAMBDA × IDMID)`.
 
-Đề không quy định phải lấy `ID` tại `VDS` nào để tính `ro`. Báo cáo chọn `1,5 V` vì đây là giá trị tròn nằm trong vùng `0,6–2,0 V`. Chọn điểm khác trong vùng bão hòa sẽ cho `ro` hơi khác vì `ro = 1/(λID)` phụ thuộc vào dòng `ID`.
+Đề không quy định phải lấy `ID` tại `VDS` nào để tính `ro`. Báo cáo chọn `1,5 V` vì đây là giá trị tròn nằm trong vùng `0,5–2,0 V`. Chọn điểm khác trong vùng bão hòa sẽ cho `ro` hơi khác vì `ro = 1/(λID)` phụ thuộc vào dòng `ID`.
 
 ## 7. Tự kiểm tra phép tính
 
 Ví dụ với `L = 1 µm`, đọc trong log:
 
 ```text
-IDLOW  = 154.6159 µA
+ID0    = 153.1442 µA
 IDHIGH = 159.5005 µA
 IDMID  = 158.5193 µA
 ```
 
 ```text
-gds    = (159.5005 - 154.6159) µA / 1.4 V = 3.4890 µS
-IDZERO = 154.6159 µA - 0.6 × 3.4890 µA = 152.5225 µA
-lambda = 3.4890 µS / 152.5225 µA = 0.0228756 V^-1
-ro     = 1 / (0.0228756 × 158.5193 µA) = 275.8 kΩ
+gds    = (159.5005 - 153.1442) µA / 1.5 V = 4.2375 µS
+lambda = 4.2375 µS / 153.1442 µA = 0.0276702 V^-1
+ro     = 1 / (0.0276702 × 158.5193 µA) = 228.0 kΩ
 ```
 
 ## 8. Lỗi thường gặp
@@ -309,5 +300,5 @@ ro     = 1 / (0.0228756 × 158.5193 µA) = 275.8 kΩ
 - [ ] Nguồn gate tên `VGS`, nguồn drain tên `VDS`.
 - [ ] Có `.include`, `.step`, `.dc` và các lệnh `.meas`.
 - [ ] Đồ thị có năm đường cong từ `VDS = 0 V`.
-- [ ] Khi tính `λ`, chỉ dùng đoạn `0,6–2,0 V`.
+- [ ] Khi tính `λ`, chỉ dùng đoạn `0,5–2,0 V`.
 - [ ] Đã tự kiểm tra một dòng kết quả bằng công thức.

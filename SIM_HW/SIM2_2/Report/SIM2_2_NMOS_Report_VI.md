@@ -18,7 +18,7 @@ Mô phỏng sử dụng mô hình `NM` Level 8 BSIM3 và symbol `nmos_035` trong
 
 Đặc tuyến đầy đủ được quét từ `VDS = 0 V` đến `2,0 V` với bước 10 mV để quan sát cả vùng tuyến tính (triode) ở điện áp thấp và vùng bão hòa. Giới hạn trên 2,0 V là lựa chọn của mô phỏng để có khoảng điện áp đủ rộng quan sát độ dốc dòng điện đầu ra.
 
-Theo tiêu chuẩn gần đúng của mô hình kênh dài, ranh giới bão hòa là `VDS ≈ VGS − Vth = VOV`, tương đương khoảng 0,5 V với điểm phân cực đã chọn. Khi tính `λ`, bắt đầu tại 0,6 V, cao hơn ranh giới danh định 0,1 V, và chỉ dùng đoạn bão hòa 0,6–2,0 V. Mốc 0,6 V tạo khoảng đệm với điểm gối; các điểm thấp hơn vẫn được giữ trên đồ thị đặc tuyến đầy đủ nhưng không đưa vào phép khớp vùng bão hòa. Các giới hạn số này do mô phỏng chọn, đề không quy định cụ thể.
+Theo tiêu chuẩn gần đúng của mô hình kênh dài, ranh giới bão hòa là `VDS ≈ VGS − Vth = VOV`, tương đương khoảng 0,5 V với điểm phân cực đã chọn. Vì vậy, khi tính `λ`, dùng trực tiếp đoạn `VDS = 0,5–2,0 V`, bắt đầu đúng tại ranh giới danh định `VOV = 0,5 V`. Các điểm dưới 0,5 V vẫn được giữ trên đồ thị đặc tuyến đầy đủ nhưng không đưa vào phép tính vùng bão hòa.
 
 Điện áp cổng được giữ cố định trong mỗi lượt quét `VDS`. Vì model BSIM3 có thể làm `Vth` hiệu dụng thay đổi nhẹ theo `VDS`, `VOV = 0,500 V` được khớp tại điểm tham chiếu `VDS = 1,0 V`; giá trị này là overdrive danh định, không hoàn toàn bất biến ở mọi điểm quét.
 
@@ -30,15 +30,15 @@ Trong vùng bão hòa, sử dụng biểu thức gần đúng theo yêu cầu b�
 I_D \approx I_{D0}(1+\lambda V_{DS}).
 \]
 
-Ước lượng độ dốc trung bình chỉ trên đoạn bão hòa đã chọn, dùng dòng điện mô phỏng tại `VDS = 0,6 V` và `2,0 V`:
+Ước lượng độ dốc trung bình trên đoạn `VDS = 0,5–2,0 V`, dùng dòng điện mô phỏng tại hai đầu đoạn:
 
 \[
-g_{ds}\approx\frac{I_D(2{,}0\,\mathrm V)-I_D(0{,}6\,\mathrm V)}{2{,}0-0{,}6},\qquad
-I_{D0}\approx I_D(0{,}6\,\mathrm V)-0{,}6g_{ds},\qquad
+g_{ds}\approx\frac{I_D(2{,}0\,\mathrm V)-I_D(0{,}5\,\mathrm V)}{2{,}0-0{,}5},\qquad
+I_{D0}=I_D(0{,}5\,\mathrm V),\qquad
 \lambda\approx\frac{g_{ds}}{I_{D0}}.
 \]
 
-Đề không chỉ định phải lấy `ID` tại giá trị `VDS` nào trong vùng bão hòa để tính `ro`. Trong báo cáo này, chọn `VDS = 1,5 V` vì đây là giá trị tròn, nằm rõ trong khoảng 0,6–2,0 V dùng để khớp độ dốc vùng bão hòa và thuận tiện đọc kết quả. Nếu chọn một `VDS` khác trong vùng bão hòa thì `ro` sẽ thay đổi nhẹ, vì `ro = 1/(λID)` phụ thuộc vào dòng phân cực.
+Đề không chỉ định phải lấy `ID` tại giá trị `VDS` nào trong vùng bão hòa để tính `ro`. Trong báo cáo này, chọn `VDS = 1,5 V` vì đây là giá trị tròn, nằm rõ trong khoảng 0,5–2,0 V dùng để khớp độ dốc vùng bão hòa và thuận tiện đọc kết quả. Nếu chọn một `VDS` khác trong vùng bão hòa thì `ro` sẽ thay đổi nhẹ, vì `ro = 1/(λID)` phụ thuộc vào dòng phân cực.
 
 Sau đó, tính điện trở đầu ra tại điểm đã chọn `VDS = 1,5 V` theo công thức đề bài:
 
@@ -46,17 +46,17 @@ Sau đó, tính điện trở đầu ra tại điểm đã chọn `VDS = 1,5 V` 
 r_o\approx\frac{1}{\lambda I_D(1{,}5\,\mathrm V)}.
 \]
 
-Dữ liệu từ 0 V được dùng để vẽ toàn bộ đặc tuyến; các điểm dưới 0,6 V không dùng để tính các thông số trong vùng bão hòa.
+Dữ liệu từ 0 V được dùng để vẽ toàn bộ đặc tuyến; các điểm dưới 0,5 V không dùng để tính các thông số trong vùng bão hòa.
 
 ### (a.2) Kết quả tính toán
 
 | L (μm) | W (μm) | ID tại 1,5 V (μA) | Độ dốc gds (μS) | λ (V⁻¹) | ro (kΩ) |
 |---:|---:|---:|---:|---:|---:|
-| 1 | 10 | 158,519 | 3,489 | 0,022876 | 275,769 |
-| 2 | 20 | 165,615 | 2,464 | 0,015263 | 395,605 |
-| 5 | 50 | 169,750 | 1,729 | 0,010358 | 568,763 |
-| 10 | 100 | 171,163 | 1,379 | 0,008162 | 715,806 |
-| 20 | 200 | 171,800 | 1,097 | 0,006455 | 901,765 |
+| 1 | 10 | 158,519 | 4,238 | 0,027670 | 227,985 |
+| 2 | 20 | 165,615 | 3,017 | 0,018642 | 323,898 |
+| 5 | 50 | 169,750 | 2,130 | 0,012743 | 462,306 |
+| 10 | 100 | 171,163 | 1,727 | 0,010215 | 571,923 |
+| 20 | 200 | 171,800 | 1,422 | 0,008362 | 696,075 |
 
 ## (b) Đồ thị, so sánh và nhận xét
 
@@ -64,7 +64,7 @@ Phần (b) sử dụng cùng dữ liệu của phần (a) để vẽ đặc tuy�
 
 ### (b.1) Đặc tuyến dòng máng đầy đủ, từ 0 V qua vùng bão hòa
 
-Vùng tô xám là vùng triode ở điện áp thấp. Vùng tô xanh đánh dấu khoảng 0,6–2,0 V dùng để ước lượng `λ`.
+Vùng tô xám là vùng triode ở điện áp thấp. Vùng tô xanh đánh dấu khoảng 0,5–2,0 V dùng để ước lượng `λ`.
 
 ![Đặc tuyến đầy đủ của NMOS 035 và khoảng dùng để tính trong vùng bão hòa](../Simulation/SIM2_2_NMOS_ID_vs_VDS.png)
 
@@ -76,11 +76,11 @@ Vùng tô xám là vùng triode ở điện áp thấp. Vùng tô xanh đánh d�
 
 Đồ thị đầy đủ `ID`–`VDS` cho thấy dòng tăng gần tuyến tính ở `VDS` thấp, sau đó các đường đặc tuyến phẳng hơn khi transistor vào vùng bão hòa. Chỉ đoạn bão hòa được dùng để ước lượng điều chế chiều dài kênh, phù hợp với công thức gần đúng của bài.
 
-Khi `L` tăng từ 1 μm lên 20 μm, `λ` giảm từ 0,022876 V⁻¹ xuống 0,006455 V⁻¹, trong khi `ro` tăng từ 275,8 kΩ lên 901,8 kΩ. Đường đặc tuyến đầu ra phẳng hơn khi kênh dài hơn, cho thấy điều chế chiều dài kênh yếu đi. Dòng điện tại 1,5 V tăng nhẹ từ 158,5 μA lên 171,8 μA dù `W/L` và overdrive danh định được giữ cố định. Đây là đặc tính của model BSIM3 được cung cấp trên các kích thước đang xét; mô hình bình phương lý tưởng cho kênh dài sẽ dự đoán mức biến thiên nhỏ hơn.
+Khi `L` tăng từ 1 μm lên 20 μm, `λ` giảm từ 0,027670 V⁻¹ xuống 0,008362 V⁻¹, trong khi `ro` tăng từ 228,0 kΩ lên 696,1 kΩ. Đường đặc tuyến đầu ra phẳng hơn khi kênh dài hơn, cho thấy điều chế chiều dài kênh yếu đi. Dòng điện tại 1,5 V tăng nhẹ từ 158,5 μA lên 171,8 μA dù `W/L` và overdrive danh định được giữ cố định. Đây là đặc tính của model BSIM3 được cung cấp trên các kích thước đang xét; mô hình bình phương lý tưởng cho kênh dài sẽ dự đoán mức biến thiên nhỏ hơn.
 
 ## Các tệp sử dụng
 
 - `../Simulation/SIM2_2_NMOS.asc` — schematic LTspice, quét toàn dải `VDS` từ 0 đến 2,0 V và đo `λ`, `ro` trên đoạn bão hòa.
 - `../Simulation/SIM2_2_NMOS_VTH.cir` — netlist hiệu chỉnh điện áp ngưỡng tại `VDS = 1 V`.
 - `../Simulation/SIM2_2_NMOS_ID_VDS.csv` — dữ liệu đặc tuyến đầu ra đầy đủ từ 0 đến 2 V.
-- `../Simulation/SIM2_2_NMOS_results.csv` — thông số tính từ đoạn bão hòa 0,6–2,0 V.
+- `../Simulation/SIM2_2_NMOS_results.csv` — thông số tính từ đoạn bão hòa 0,5–2,0 V.
