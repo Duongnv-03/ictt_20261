@@ -55,7 +55,9 @@ L={LCH} AD={2u*WIDTH} AS={2u*WIDTH} PD={2*(2u+WIDTH)} PS={2*(2u+WIDTH)}
 
 ## 4. Thêm lệnh mô phỏng
 
-Nhấn `S` hoặc chọn **.op / SPICE Directive**, rồi dán khối lệnh sau vào schematic:
+Trong LTspice 26, nhấn phím dấu chấm `.` hoặc bấm biểu tượng `.t` màu đen trên thanh công cụ, rồi bấm vào vùng trống trên schematic. Hộp **Edit Text on the Schematic** mở ra; dán khối lệnh sau và bấm **OK**. Sau đó bấm thêm một lần để đặt hộp chữ, rồi nhấn `Esc`.
+
+Nút **Simulate → Configure Analysis** dùng để tạo nhanh các lệnh phân tích như `.op`, `.dc`, `.tran` hoặc `.ac`. Các lệnh tùy chỉnh như `.include`, `.step`, `.param` và `.meas` phải được đặt bằng SPICE Directive.
 
 ```spice
 .include "5827_035.lib"
