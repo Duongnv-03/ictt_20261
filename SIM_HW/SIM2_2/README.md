@@ -1,5 +1,6 @@
-# SIM.2.2 — NMOS channel-length modulation
+# SIM.2.2 — Điều chế chiều dài kênh của NMOS
 
-Open `SIM2_2_NMOS.asc` in LTspice. This directory includes the 035 NMOS model (`5827_035.lib`) and symbol (`nmos_035.asy`), so the schematic does not depend on a machine-specific path. It also contains the Vth calibration netlist, Markdown and PDF reports, plots, CSV data, and the LTspice-generated simulation files.
+Mở `SIM2_2_NMOS.asc` bằng LTspice. Thư mục này có model NMOS 035 (`5827_035.lib`) và symbol (`nmos_035.asy`), nên schematic không phụ thuộc đường dẫn riêng của máy. Báo cáo tiếng Anh và tiếng Việt, đồ thị, dữ liệu CSV, netlist hiệu chỉnh Vth và các file LTspice được lưu cùng thư mục.
 
-`SIM2_2_NMOS_Report.md` summarizes the setup, method, results, and discussion.
+- Báo cáo tiếng Việt: `SIM2_2_NMOS_Report_VI.md` và `SIM2_2_NMOS_Report_VI.pdf`.
+- Báo cáo tiếng Anh: `SIM2_2_NMOS_Report.md` và `SIM2_2_NMOS_Report.pdf`.
